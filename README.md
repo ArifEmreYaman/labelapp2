@@ -1,67 +1,67 @@
-# LabelApp2 — YOLO Image Labeling & Training Tool
+# LabelApp2 — YOLO Görüntü Etiketleme & Eğitim Aracı
 
-A desktop application for labeling images with bounding boxes and training YOLO models — built with PyQt5. Works on **Ubuntu** and **Windows**.
-
----
-
-## Features
-
-- **Rectangle labeling** — draw bounding boxes with left-click drag
-- **Move & resize** — drag boxes to reposition, drag corner handles to resize
-- **Right-click menu** — delete or change class of any box
-- **Unlimited label classes** — custom names and colors, rename/recolor anytime
-- **Auto-save** — annotations saved automatically when switching images
-- **Recursive folder scan** — finds images in all subfolders
-- **External dataset support** — automatically reads `data.yaml` and `classes.txt` from Roboflow, LabelImg, CVAT exports
-- **YOLO training** — supports YOLO11, YOLOv8, YOLOv9, YOLOv10 with live log output
-- **Use existing datasets** — directly train from Roboflow/Ultralytics datasets without re-exporting
-- **Dark theme** — easy on the eyes during long labeling sessions
+Bounding box etiketleme ve YOLO model eğitimi için masaüstü uygulaması — PyQt5 ile geliştirildi. **Ubuntu** ve **Windows** üzerinde çalışır.
 
 ---
 
-## Folder Structure
+## Özellikler
+
+- **Dikdörtgen etiketleme** — sol tık sürükle ile bounding box çiz
+- **Taşıma & yeniden boyutlandırma** — boxları sürükleyerek taşı, köşe tutamaçlarıyla boyutlandır
+- **Sağ tık menüsü** — herhangi bir box'u sil veya sınıfını değiştir
+- **Sınırsız etiket sınıfı** — özel isim ve renk, istediğin zaman yeniden adlandır/renklendir
+- **Otomatik kaydetme** — resim değiştirilince etiketler otomatik kaydedilir
+- **Alt klasör tarama** — tüm alt klasörlerdeki resimleri otomatik bulur
+- **Dış veri seti desteği** — Roboflow, LabelImg, CVAT exportlarındaki `data.yaml` ve `classes.txt` dosyalarını otomatik okur
+- **YOLO eğitimi** — YOLO11, YOLOv8, YOLOv9, YOLOv10 desteği, canlı log çıktısı
+- **Hazır veri seti kullanımı** — Roboflow/Ultralytics veri setlerini yeniden export etmeden direkt eğit
+- **Koyu tema** — uzun etiketleme oturumlarında göz yormaz
+
+---
+
+## Klasör Yapısı
 
 ```
-your_images/
-├── photo1.jpg
-├── photo2.jpg
-└── labels/                  # auto-created
-    ├── photo1.txt
-    ├── photo2.txt
+fotograflar/
+├── foto1.jpg
+├── foto2.jpg
+└── labels/                  # otomatik oluşturulur
+    ├── foto1.txt
+    ├── foto2.txt
     └── labelapp_classes.json
 ```
 
 ---
 
-## Installation
+## Kurulum
 
-### Requirements
+### Gereksinimler
 
 - Python 3.10+
-- Anaconda (recommended)
-- NVIDIA GPU (optional but recommended for training)
+- Anaconda (önerilir)
+- NVIDIA GPU (isteğe bağlı, eğitim için önerilir)
 
-### Setup
+### Adımlar
 
 ```bash
-# 1. Clone the repo
+# 1. Repoyu klonla
 git clone https://github.com/ArifEmreYaman/labelapp2.git
 cd labelapp2
 
-# 2. Create conda environment
+# 2. Conda ortamı oluştur
 conda create -n labelapp python=3.10 -y
 conda activate labelapp
 
-# 3. Install PyQt5 via conda (avoids xcb plugin issues on Linux)
+# 3. PyQt5'i conda üzerinden kur (Linux'ta xcb sorununu önler)
 conda install pyqt -y
 
-# 4. Install other dependencies
+# 4. Diğer kütüphaneleri kur
 pip install ultralytics PyYAML numpy opencv-python Pillow
 ```
 
 ---
 
-## Running
+## Çalıştırma
 
 ```bash
 conda activate labelapp
@@ -71,58 +71,58 @@ python main.py
 
 ---
 
-## Usage Guide
+## Kullanım Kılavuzu
 
-### 1. Labeling
+### 1. Etiketleme
 
-| Action | How |
-|--------|-----|
-| Open image folder | `File > Open Folder` or toolbar button |
-| Draw bounding box | Left-click and drag on the image |
-| Select a box | Left-click on it |
-| Move a box | Click inside selected box and drag |
-| Resize a box | Drag the white corner handles |
-| Delete a box | Right-click → Delete, or select + `Del` key |
-| Change box class | Right-click → Change Class |
-| Next / Previous image | `D` / `A` keys or toolbar buttons |
-| Save | `Ctrl+S` (also auto-saves on image switch) |
+| İşlem | Nasıl Yapılır |
+|-------|---------------|
+| Resim klasörü aç | `Dosya > Klasör Aç` veya araç çubuğu butonu |
+| Bounding box çiz | Resim üzerinde sol tık sürükle |
+| Box seç | Sol tık ile üzerine tıkla |
+| Box taşı | Seçili boxın içine tıklayıp sürükle |
+| Box boyutlandır | Beyaz köşe tutamaçlarını sürükle |
+| Box sil | Sağ tık → Sil, veya seç + `Del` tuşu |
+| Box sınıfını değiştir | Sağ tık → Sınıf Değiştir |
+| Sonraki / Önceki resim | `D` / `A` tuşları veya araç çubuğu butonları |
+| Kaydet | `Ctrl+S` (resim değiştirilince otomatik kaydedilir) |
 
-### 2. Managing Classes
+### 2. Sınıf Yönetimi
 
-- Click **+ Add** in the right panel to add a class with a custom color
-- **Double-click** a class name to rename it
-- Click **Color** to change its color
-- Right-click on any bounding box → **Change Class** to reassign
+- Sağ panelde **+ Ekle** butonuyla özel renkli sınıf ekle
+- Sınıf adına **çift tıklayarak** yeniden adlandır
+- **Renk** butonuyla rengini değiştir
+- Herhangi bir bounding box'a sağ tık → **Sınıf Değiştir** ile sınıf ata
 
-### 3. Training
+### 3. Eğitim
 
-1. Click **Start Training** in the toolbar
-2. Select YOLO model (YOLO11m recommended)
-3. Set epochs, batch size, image size
-4. Choose output folder
-5. Click **Start Training**
+1. Araç çubuğundaki **Eğitimi Başlat** butonuna tıkla
+2. YOLO modelini seç (YOLO11m önerilir)
+3. Epoch sayısı, batch size ve görüntü boyutunu ayarla
+4. Çıktı klasörünü seç
+5. **Eğitimi Başlat** butonuna bas
 
-> **Tip:** If you open a Roboflow/Ultralytics dataset that already has a `data.yaml`, the dialog will detect it and offer to use it directly — no re-export needed.
+> **İpucu:** Roboflow/Ultralytics veri seti açtığında ve klasörde `data.yaml` varsa, uygulama otomatik algılar ve yeniden export etmeden direkt kullanma seçeneği sunar.
 
 ---
 
-## Supported Label Formats (import)
+## Desteklenen Label Formatları (içe aktarma)
 
-The app automatically finds label files in these locations:
+Uygulama, label dosyalarını şu konumlarda otomatik arar:
 
-| Format | Location |
-|--------|----------|
-| Our format | `images_folder/labels/image.txt` |
-| LabelImg inline | `images_folder/image.txt` |
-| YOLO standard | `images_folder/images/` + sibling `labels/` |
+| Format | Konum |
+|--------|-------|
+| LabelApp2 formatı | `resim_klasoru/labels/resim.txt` |
+| LabelImg (inline) | `resim_klasoru/resim.txt` |
+| YOLO standart | `images/` klasörü + kardeş `labels/` klasörü |
 | Roboflow | `train/images/` + `train/labels/` |
 
 ---
 
-## Supported YOLO Models
+## Desteklenen YOLO Modelleri
 
-| Family | Variants |
-|--------|----------|
+| Aile | Varyantlar |
+|------|------------|
 | YOLO11 | n, s, m, l, x |
 | YOLOv8 | n, s, m, l, x |
 | YOLOv9 | c, e |
@@ -130,27 +130,27 @@ The app automatically finds label files in these locations:
 
 ---
 
-## Troubleshooting
+## Sorun Giderme
 
-**Qt platform plugin "xcb" error on Ubuntu:**
+**Ubuntu'da Qt "xcb" eklentisi hatası:**
 ```bash
-conda install pyqt -y   # use conda's PyQt5 instead of pip
+conda install pyqt -y   # pip yerine conda ile kur
 ```
 
-**Training fails — "no images found":**
-Make sure your output folder exists and you have at least 1 labeled image.
+**Eğitim başarısız — "resim bulunamadı":**
+Çıktı klasörünün var olduğundan ve en az 1 etiketlenmiş resim bulunduğundan emin ol.
 
-**Classes show as cls0 after reopening:**
-The app saves class names to `labels/labelapp_classes.json`. If this file is missing, re-add your classes from the right panel.
-
----
-
-## License
-
-MIT License — free to use, modify, and distribute.
+**Yeniden açınca sınıflar cls0 olarak görünüyor:**
+Uygulama sınıf isimlerini `labels/labelapp_classes.json` dosyasına kaydeder. Bu dosya yoksa sağ panelden sınıfları tekrar ekle.
 
 ---
 
-## Author
+## Lisans
+
+MIT Lisansı — özgürce kullanabilir, değiştirebilir ve dağıtabilirsin.
+
+---
+
+## Geliştirici
 
 **Arif Emre Yaman** — [github.com/ArifEmreYaman](https://github.com/ArifEmreYaman)
